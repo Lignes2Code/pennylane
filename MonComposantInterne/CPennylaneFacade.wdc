@@ -1,0 +1,326 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : CPennylaneFacade
+ major_version : 30
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x19ee1425003dc52f
+ internal_properties : HgAAAB4AAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      CPennylaneFacade est une Classe
+      	prive
+      	oConfig		est un CPennylaneConfig dynamique
+      	oTokenStore	est un CPennylaneTokenStore dynamique
+      	oAuth		est un IAuthStrategy
+      	oOAuth2		est un CPennylaneOAuth2Auth dynamique
+      	bModeOAuth2	est un Booléen	= Faux
+      	oEventBus	est un CPennylaneEventBus dynamique
+      
+      	public
+      	CallbackFactureEmise	est une Procédure(CustomerInvoicesResponse est CustomerInvoices__Response)
+      	CallbackFactureRecue	est une Procédure(SupplierInvoicesResponse est SupplierInvoices__Response)
+      	CallbackStatutChange	est une Procédure(sID est une Chaîne, sStatut est une Chaîne)
+      	CallbackTokenRefraichi	est une Procédure(CPennylaneToken)
+      	CallbackErreur			est une Procédure(sCode est une Chaîne, sMsg est une Chaîne)
+      
+      fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     procedure_id : 1868453044555793711
+     type_code : 27
+     code : |1+
+      procédure Constructeur()
+      
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1868453044555859247
+     type_code : 28
+     code : |1+
+      procédure Destructeur()
+      
+     type : 655360
+   -
+     name : Initialiser
+     procedure_id : 1868453778995437785
+     type_code : 12
+     code : |1-
+      PROCÉDURE Initialiser(cheminConfig est une Chaîne) : Booléen
+      oConfig = new CPennylaneConfig()
+      SI PAS oConfig.Charger(cheminConfig) ALORS
+      	RETOUR Faux
+      FIN
+      oEventBus	= new CPennylaneEventBus()
+      oTokenStore	= new CPennylaneTokenStore(oConfig)
+      oTokenStore.Charger()
+      oOAuth2		= new CPennylaneOAuth2Auth(oConfig, oTokenStore, oEventBus)
+      oAuth		<- oOAuth2
+      bModeOAuth2	= Vrai
+      RETOUR Vrai
+     type : 458752
+   -
+     name : InitialiserAvecTokenDev
+     procedure_id : 1868454040988503497
+     type_code : 12
+     code : |1-
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure InitialiserAvecTokenDev(cheminConfig est une Chaîne, sTokenDev est une Chaîne) : Booléen
+      SI PAS Initialiser(cheminConfig) ALORS RETOUR Faux
+      devAuth est un CPennylaneDevTokenAuth dynamique = new CPennylaneDevTokenAuth(oConfig)
+      devAuth.TokenDev	= sTokenDev
+      oAuth				<- devAuth
+      bModeOAuth2			= Faux
+      RETOUR Vrai
+     type : 458752
+   -
+     name : AjouterObservateur
+     procedure_id : 1868454247146981408
+     type_code : 12
+     code : |1-
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //! @param obs (Interface.IObserver)  Observateur(Interface.IObserver)  <indiquez ici le rôle de Observateurobs>
+      //!
+      //! @return (chaîne ANSI)  <indiquez ici les valeurs possibles ainsi que leur interprétation>
+      //!
+      //!
+      
+      procédure AjouterObservateur(obs est un IObserver) : Chaîne
+      RETOUR oEventBus.Abonner(obs)
+     type : 458752
+   -
+     name : RetirerObservateur
+     procedure_id : 1868454401765906116
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure RetirerObservateur(sID est une Chaîne)
+      oEventBus.Desabonner(sID)
+     type : 458752
+   -
+     name : Authentifier
+     procedure_id : 1868454496255273883
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure Authentifier(): Booléen
+      RETOUR oAuth.Authentifier()
+      
+     type : 458752
+   -
+     name : TraiterCallbackOAuth
+     procedure_id : 1868454586449608489
+     type_code : 12
+     code : |1-
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure TraiterCallbackOAuth(sCode est une Chaîne, sState est une Chaîne) : Booléen
+      SI PAS bModeOAuth2 ALORS RETOUR Faux
+      RETOUR oOAuth2.EchangerCode(sCode, sState)
+     type : 458752
+   -
+     name : CréerRequête
+     procedure_id : 1868710304508461006
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure CréerRequête():apiRequête
+      oReq est une apiRequête
+      oReq.EntêteHTTP["Authorization"] = oAuth.ObtenirHeader()
+      RETOUR oReq
+     type : 458752
+   -
+     name : GererErreur
+     procedure_id : 1868712065445527730
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure GererErreur(sSource est une Chaîne, oRep est une apiRéponse)
+      sCode	est une Chaîne	= oRep.RéponseHTTP.CodeEtat
+      sMsg	est une Chaîne	= oRep.RéponseHTTP.Contenu + " [" + sSource + "]"
+      
+      SI CallbackErreur <> Null ALORS
+      	CallbackErreur(sCode, sMsg)
+      FIN
+      oEventBus.PublierErreur(sCode, sMsg)
+      
+     type : 458752
+   -
+     name : ObtenirProfil
+     procedure_id : 1868712374683376005
+     type_code : 12
+     code : |1-
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure ObtenirProfil()
+      
+      oRep est une apiRéponse = getMe(CréerRequête())
+      SI oRep.RéponseHTTP.CodeEtat <> 200 ALORS
+      	GererErreur("ObtenirProfil", oRep)
+      	RETOUR NULL
+      FIN
+      RETOUR oRep.Valeur
+     type : 458752
+   -
+     name : EmettreFacture
+     procedure_id : 1868712499237784613
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure EmettreFacture(cheminFichier est une Chaîne) : CustomerInvoices__Response
+      oRep est une apiRéponse = importCustomerInvoices(cheminFichier, CréerRequête())
+      SI oRep.RéponseHTTP.CodeEtat <> 200 ALORS
+      	GererErreur("EmettreFacture", oRep)
+      	RETOUR NULL
+      FIN
+      oFacture est un CustomerInvoices__Response = oRep.Valeur
+      oEventBus.PublierFactureEmise(oFacture)
+      SI CallbackFactureEmise <> NULL ALORS CallbackFactureEmise(oFacture)
+      RETOUR oFacture
+      
+     type : 458752
+   -
+     name : CreerFactureClient
+     procedure_id : 1868714616657023391
+     type_code : 12
+     code : |1+
+      
+      
+      procédure CreerFactureClient(oFacture est un stFactureClientCreation) : CustomerInvoices__Response
+      oRep est une apiRéponse = postCustomerInvoices(oFacture, CréerRequête())
+      SI oRep.RéponseHTTP.CodeEtat <> 201 ALORS
+      	GererErreur("CreerFactureClient", oRep)
+      	RETOUR Null
+      FIN
+      oResult est un CustomerInvoices__Response = oRep.Valeur
+      RETOUR oResult
+      
+      
+     type : 458752
+   -
+     name : RecupererFactureClient
+     procedure_id : 1868715836431426655
+     type_code : 12
+     code : |1-
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure RecupererFactureClient(id est une Chaîne) : Customers__Response
+      oRep est une apiRéponse = getCustomer(id, CréerRequête())
+      SI oRep.RéponseHTTP.CodeEtat <> 200 ALORS
+      	GererErreur("RecupererClient", oRep)
+      	RETOUR Null
+      FIN
+      oClient est un Customers__Response = oRep.Valeur
+      RETOUR oClient
+     type : 458752
+   -
+     name : ListerClients
+     procedure_id : 1868724490790708181
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure ListerClients(): Variant
+      oRep est une apiRéponse = getCustomers(CréerRequête())
+      SI oRep.RéponseHTTP.CodeEtat <> 200 ALORS
+      	GererErreur("ListerClients", oRep)
+      	RETOUR null
+      FIN
+      RETOUR oRep.Valeur
+      
+     type : 458752
+   -
+     name : CreerClientEntreprise
+     procedure_id : 1868724645410025839
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure CreerClientEntreprise(corps est un Variant) : Customers__Response
+      oRep est une apiRéponse = postCompanyCustomer(corps)
+      SI oRep.RéponseHTTP.CodeEtat <> 200 ALORS
+      	GererErreur("CreerClientEntreprise", oRep)
+      	RETOUR Null
+      FIN
+      oClient est un Customers__Response = oRep.Valeur
+      RETOUR oClient
+      
+     type : 458752
+   -
+     name : EnvoyerPOST
+     procedure_id : 1868763463324768533
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure EnvoyerPOST(sEndpoint est une Chaîne, sSource est une Chaîne, sCorpsJSON est une Chaîne, sCodeHTTP est une Chaîne) : Chaîne
+      req est un httpRequête
+      req.URL						= oConfig.URLComplete(sEndpoint)
+      req.Méthode					= httpPost
+      req.ContentType				= "application/json"
+      req.Entête["Authorization"]	= oAuth.ObtenirHeader()
+      req.Contenu					= sCorpsJSON
+      rep est un httpRéponse = HTTPEnvoie(req)
+      sCodeHTTP = rep.CodeEtat
+      SI rep.CodeEtat >= 300 ALORS
+      	sCode	est une Chaîne	= rep.CodeEtat
+      	sMsg	est une Chaîne	= rep.Contenu + " [" + sSource + "]"
+      	SI CallbackErreur <> Null ALORS CallbackErreur(sCode, sMsg)
+      	oEventBus.PublierErreur(sCode, sMsg)
+      	RETOUR ""
+      FIN
+      RETOUR rep.Contenu
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HgAAAB4AAADXPUOq6bQdTI/fs1mC0I6nimWl2G84EsAbne5i32IM05uoRA==
+  original_name : Classe1
+resources :
+ string_res :
+  identifier : 0x19ee1424003abef5
+  internal_properties : HgAAAB4AAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : HgAAAB4AAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

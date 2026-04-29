@@ -1,0 +1,49 @@
+Proposition commerciale — Connecteur Pennylane RFE pour WinDev
+
+⚠️ Préalable — Contrainte de compatibilité WinDev
+Le développement est recommandé en WinDev version 24 afin d'assurer la compatibilité directe avec l'application maître existante. Toute autre version (WinDev 25 à 28) n'est pas compatible sans réécriture complète des structures de données et des endpoints API.
+
+Si la version maître est migrée en WinDev 28 ou supérieure, le développement pourra être réalisé directement dans cette version, à condition que la migration soit effective avant le début du projet.
+
+En cas de migration, il sera nécessaire de :
+- Recréer toutes les structures de données métier
+- Adapter l'ensemble des endpoints et appels API
+- Procéder à des tests de non-régression complets
+
+Ces adaptations feront l'objet d'un devis complémentaire si cette option est retenue.
+
+1. Périmètre de la mission
+
+Phase 1 — Infrastructure et authentification
+- Architecture logicielle : Conception complète — design patterns SOLID adaptés à WinDev/WLangage (1 j)
+- Authentification OAuth 2.0 : Flow Authorization Code, échange de code, refresh automatique (1 j)
+- Gestion de configuration : Paramétrage JSON, bascule sandbox/production sans recompilation (0,5 j)
+- Gestion des tokens : Persistance sécurisée, vérification d’expiration automatique (0,5 j)
+- Façade unifiée + bus d’événements : Point d’entrée unique, notifications vers l’application maître (0,5 j)
+- Composant OpenAPI + structures métier : Typage fort de tous les objets Pennylane (factures, clients, fournisseurs) (1 j)
+Total Phase 1 : 4 jours
+
+Phase 2 — Couche métier RFE
+- Factures clients : Création, récupération, pagination, Factur-X (obligation sept. 2026) (2 j)
+- Factures fournisseurs : Récupération, statuts, pagination (obligation sept. 2026) (0,5 j)
+- Client HTTP centralisé : Gestion des headers, erreurs, sandbox/production (0,5 j)
+Total Phase 2 : 3 jours
+
+Phase 3 — Intégration et recette
+Note sur le flow OAuth 2.0 : lors de la première connexion, l’utilisateur est redirigé vers Pennylane dans le navigateur pour autoriser l’application. Une fenêtre WinDev dédiée permettra à l’utilisateur de coller ce code pour finaliser la connexion.
+
+Remarque : une fenêtre de provisioning et de création d’utilisateur sera nécessaire pour permettre l’initialisation du compte Pennylane lors de la première utilisation.
+
+- Fenêtre de login : Interface WinDev de connexion utilisateur (identifiants, mémorisation de session, gestion des erreurs d’authentification) (0,75 j)
+- Fenêtre de connexion OAuth : Interface WinDev pour lancer l’autorisation Pennylane, coller le code reçu et valider la connexion (0,75 j)
+- Fenêtre de provisioning / création utilisateur : Provisioning et création d’utilisateur Pennylane lors de la première utilisation (1 j)
+- Intégration dans WinDev : Connexion du composant à votre application maître (0,5 j)
+- Tests et recette : Validation sandbox + données réelles, correction des anomalies (0,5 j)
+Total Phase 3 : 3,5 jours
+
+3. Récapitulatif financier
+
+Phase 1 : 4 j
+Phase 2 : 3 j
+Phase 3 : 3,5 j
+TOTAL : 10 jours

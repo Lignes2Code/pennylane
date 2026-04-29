@@ -1,0 +1,193 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : CPennylaneConfig
+ major_version : 30
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x19ea61f50092b6c1
+ internal_properties : HgAAAB4AAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      CPennylaneConfig est une Classe
+      
+      	CONSTANTE
+      		ENV_SANDBOX		= "SANDBOX"
+      		ENV_PRODUCTION	= "PRODUCTION"
+      		URL_SANDBOX		= "https://sandbox.pennylane.com"
+      		URL_PRODUCTION	= "https://app.pennylane.com"
+      		URL_PROV		= "https://app.pennylane.com/api/partner/v2"
+      		API_BASE		= "/api/external/v2"
+      	FIN
+      
+      	// Attributs publics
+      	CheminFichier		est une Chaîne
+      	Environnement		est une Chaîne	= ENV_PRODUCTION
+      	BaseURL				est une Chaîne
+      	BaseURLProvisioning	est une Chaîne
+      	ClientID			est une Chaîne
+      	ClientSecret		est une Chaîne
+      	RedirectURI			est une Chaîne
+      	CompanyID			est une Chaîne
+      	UserID				est une Chaîne
+      fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     procedure_id : 1867412700403054273
+     type_code : 27
+     code : |1+
+      procédure Constructeur()
+      
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1867412700403119809
+     type_code : 28
+     code : |1+
+      procédure Destructeur()
+      
+     type : 655360
+   -
+     name : Charger
+     procedure_id : 1867413074065295306
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      
+      procédure Charger(cheminFichier est une Chaîne) : Booléen
+      
+      SI PAS fFichierExiste(cheminFichier) ALORS
+      	RENVOYER Faux
+      FIN
+      sContenu est une Chaîne = fChargeTexte(cheminFichier)
+      SI sContenu = "" ALORS
+      	RENVOYER Faux
+      FIN
+      sContenu.Remplace(rc,"")
+      
+      // Déchiffrer chaque champ stocké
+      Désérialise(objet,sContenu,psdJSON)
+      // Les champs ClientID, ClientSecret sont stockés chiffrés (Buffer base64)
+      // Déchiffrement fait dans Sauvegarder/Charger selon implémentation finale
+      
+      SELON Environnement
+      	CAS ENV_SANDBOX :
+      		BaseURL = URL_SANDBOX
+      	CAS ENV_PRODUCTION :
+      		BaseURL = URL_PRODUCTION
+      
+      FIN
+      BaseURLProvisioning = URL_PROV
+      renvoyer Vrai
+      
+     type : 458752
+   -
+     name : ObtenirNomMachine
+     procedure_id : 1867416703317765376
+     type_code : 12
+     code : |1-
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure PRIVÉE ObtenirNomMachine() : Chaîne
+      sBuffer	est une Chaîne	= Répète(Caract(0), 256)
+      nTaille	est un Entier	= 256
+      API("kernel32", "GetComputerNameA", &sBuffer, &nTaille)
+      RETOUR ExtraitChaîne(sBuffer, 1, Caract(0))
+     type : 458752
+   -
+     name : ObtenirNomUtilisateur
+     procedure_id : 1867421548045214731
+     type_code : 12
+     code : |1+
+      
+      procédure PRIVÉE ObtenirNomUtilisateur() : Chaîne
+      sBuffer	est une Chaîne	= Répète(Caract(0), 256)
+      nTaille	est un Entier	= 256
+      API("advapi32.dll", "GetUserNameA", &sBuffer, &nTaille)
+      RETOUR ExtraitChaîne(sBuffer, 1, Caract(0))
+      
+      
+     type : 458752
+   -
+     name : DéchiffrerValeur
+     procedure_id : 1867658286624661906
+     type_code : 12
+     code : |1+
+      PROCÉDURE PRIVÉE DéchiffrerValeur(données est un Buffer, sCle est une Chaîne) : Chaîne
+      RETOUR DécrypteStandard(données, HashChaîne(HA_SHA3_256, sCle),crypteAES256)
+     type : 458752
+   -
+     name : ChiffrerValeur
+     procedure_id : 1867668676150872981
+     type_code : 12
+     code : |1+
+      
+      procédure PRIVÉE ChiffrerValeur(valeur est une buffer, sCle est une Chaîne) : Buffer
+      RETOUR CrypteStandard(valeur, HashChaîne(HA_SHA3_256, sCle), crypteAES256)
+     type : 458752
+   -
+     name : EstConfigurer
+     procedure_id : 1867669165777192533
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure EstConfigurer()
+      RETOUR ClientID <> "" ET ClientSecret <> ""
+     type : 458752
+   -
+     name : URLComplete
+     procedure_id : 1867669243086687756
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure URLComplete(endpoint est une Chaîne) : Chaîne
+      RETOUR BaseURL + API_BASE + endpoint
+      
+     type : 458752
+   -
+     name : Sauvegarder
+     procedure_id : 1867669406295482738
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure Sauvegarder()
+      SI CheminFichier = "" ALORS
+      	RETOUR Faux
+      FIN
+      sContenu est une Chaîne
+      Sérialise(objet, sContenu, psdJSON)
+      RETOUR fSauveTexte(CheminFichier, sContenu) = 0
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HgAAAB4AAADXPUOq6bQdTI/fs1mC0I6nimWl2G84EsAbne5i32IM05uoRA==
+  original_name : Classe1
+resources :
+ string_res :
+  identifier : 0x19ea61f0008fa0f7
+  internal_properties : HgAAAB4AAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : HgAAAB4AAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

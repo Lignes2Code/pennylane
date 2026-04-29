@@ -6,14 +6,14 @@
 CLASSE CPennylaneDevTokenAuth IMPLÉMENTE IAuthStrategy
 
 // Attributs
-oConfig  est un CPennylaneConfig
+oConfig  est un CPennylaneConfig DYNAMIQUE
 TokenDev est une Chaîne
 
 // ============================================================
 // CONSTRUCTEUR
 // ============================================================
 PROCÉDURE Constructeur(config est un CPennylaneConfig)
-	oConfig = config
+	oConfig <- config
 FIN
 
 // ============================================================
@@ -21,22 +21,22 @@ FIN
 // ============================================================
 
 PROCÉDURE ObtenirHeader() : Chaîne
-	RETOURNER "Bearer " + TokenDev
+	RETOUR "Bearer " + TokenDev
 FIN
 
 PROCÉDURE EstValide() : Booléen
-	RETOURNER TokenDev <> ""
+	RETOUR TokenDev <> ""
 FIN
 
 // Le token développeur ne se rafraîchit pas
 PROCÉDURE Rafraichir() : Booléen
-	RETOURNER Faux
+	RETOUR Faux
 FIN
 
 // Charge le token dev depuis la configuration
 PROCÉDURE Authentifier() : Booléen
 	TokenDev = oConfig.ClientSecret   // Convention : stocker le dev token dans ClientSecret
-	RETOURNER TokenDev <> ""
+	RETOUR TokenDev <> ""
 FIN
 
 FIN CLASSE

@@ -8,7 +8,7 @@ info :
  description : ""
  subtype : 0
 class :
- identifier : 0x19ea4bb10011bb9a
+ identifier : 0x19eb4bd80024fec7
  internal_properties : HgAAAB4AAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
  code_elements :
   type_code : 10
@@ -16,13 +16,16 @@ class :
    -
      code : |1+
       CPennylaneToken est une Classe
-      
+      	Valeur			est une Chaîne
+      	DateExpiration	est une DateHeure
+      	Scopes			est une Chaîne
+      	Type			est une Chaîne	= "Bearer"
       fin
      type : 131072
   procedures :
    -
      name : Constructeur
-     procedure_id : 1867388219081014170
+     procedure_id : 1867669861562711751
      type_code : 27
      code : |1+
       procédure Constructeur()
@@ -30,12 +33,41 @@ class :
      type : 589824
    -
      name : Destructeur
-     procedure_id : 1867388219081079706
+     procedure_id : 1867669861562777287
      type_code : 28
      code : |1+
       procédure Destructeur()
       
      type : 655360
+   -
+     name : EstValide
+     procedure_id : 1867669943167175255
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //! @return (booléen)  <indiquez ici les valeurs possibles ainsi que leur interprétation>
+      //!
+      //!
+      
+      procédure EstValide() : Booléen
+      dMarge est une Durée = 60
+      RETOUR (DateHeureSys() < DateExpiration - dMarge)
+     type : 458752
+   -
+     name : Header
+     procedure_id : 1867670127850877940
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure Header(): Chaîne
+      RETOUR "Bearer " + Valeur
+      
+     type : 458752
   procedure_templates : []
   property_templates : []
  code_parameters :
@@ -43,7 +75,7 @@ class :
   original_name : Classe1
 resources :
  string_res :
-  identifier : 0x19ea4baf000eb4d4
+  identifier : 0x19eb4bcf0021dda2
   internal_properties : HgAAAB4AAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
 custom_note :
  internal_properties : HgAAAB4AAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

@@ -1,0 +1,160 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : CPennylaneEventBus
+ major_version : 30
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x19eb52ac009dabc2
+ internal_properties : HgAAAB4AAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      CPennylaneEventBus est une Classe
+      	// Liste des abonnés
+      	Observateurs est un tableau associatif de IObserver
+      fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     procedure_id : 1867677369173453762
+     type_code : 27
+     code : |1+
+      procédure Constructeur()
+      
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1867677369173519298
+     type_code : 28
+     code : |1+
+      procédure Destructeur()
+      
+     type : 655360
+   -
+     name : Abonner
+     procedure_id : 1867677463662821622
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //! @param obs (Interface.IObserver)  <indiquez ici le rôle de obs>
+      //!
+      //! @return (chaîne ANSI)  <indiquez ici les valeurs possibles ainsi que leur interprétation>
+      //!
+      //!
+      
+      procédure Abonner(obs est un IObserver): chaine
+      
+      sID est une chaine = DonneGUID()
+      Observateurs[sID] <- obs
+      
+      renvoyer  sID
+     type : 458752
+   -
+     name : Desabonner
+     procedure_id : 1867677669822152173
+     type_code : 12
+     code : |1+
+      
+      
+      procédure Desabonner(sID est un chaine)
+      Observateurs.Supprime(sID)
+     type : 458752
+   -
+     name : PublierTokenRefraichi
+     procedure_id : 1867677906046128927
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure PublierTokenRefraichi(oToken est un CPennylaneToken)
+      POUR TOUT obs DE Observateurs
+      	obs.SurTokenRefraichi(oToken)
+      FIN
+      
+      
+      
+     type : 458752
+   -
+     name : PublierFactureEmise
+     procedure_id : 1867707674482202021
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure PublierFactureEmise(oFacture est un CustomerInvoices__Response)
+      POUR TOUT obs DE Observateurs
+      	obs.SurFactureEmise(oFacture)
+      FIN
+     type : 458752
+   -
+     name : PublierFactureRecue
+     procedure_id : 1867733336912265707
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure PublierFactureRecue(oFacture est un SupplierInvoices__Response)
+      POUR TOUT obs DE Observateurs
+      	obs.SurFactureRecue(oFacture)
+      FIN
+      
+     type : 458752
+   -
+     name : PublierStatutChange
+     procedure_id : 1867733397041887059
+     type_code : 12
+     code : |1-
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure PublierStatutChange(id est une Chaîne, statut est une Chaîne)
+      POUR TOUT obs DE Observateurs
+      	obs.SurStatutChange(id, statut)
+      FIN
+     type : 458752
+   -
+     name : PublierErreur
+     procedure_id : 1867733465761445627
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //! @param code (chaîne ANSI)  <indiquez ici le rôle de code>
+      //! @param sMessage (chaîne ANSI)  <indiquez ici le rôle de sMessage>
+      //!
+      //!
+      
+      procédure PublierErreur(code est une Chaîne, sMessage est une Chaîne)
+      POUR TOUT obs DE Observateurs
+      	obs.SurErreur(code, sMessage)
+      FIN
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HgAAAB4AAADXPUOq6bQdTI/fs1mC0I6nimWl2G84EsAbne5i32IM05uoRA==
+  original_name : Classe1
+resources :
+ string_res :
+  identifier : 0x19eb52aa009aa5e6
+  internal_properties : HgAAAB4AAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : HgAAAB4AAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

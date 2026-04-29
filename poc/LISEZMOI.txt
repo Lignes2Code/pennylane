@@ -1,0 +1,70 @@
+=====================================================================
+ POC Pennylane — Mode d'emploi
+=====================================================================
+
+ÉTAPE 1 — Obtenir un token développeur sandbox
+-----------------------------------------------
+1. Connectez-vous sur https://sandbox.pennylane.com
+2. Allez dans Paramètres → API → Tokens développeur
+3. Créez un nouveau token et copiez-le
+
+ÉTAPE 2 — Configurer config_poc.json
+--------------------------------------
+Ouvrez poc\config_poc.json et remplacez :
+  "ClientSecret": "VOTRE_TOKEN_DEV_ICI"
+par votre token (ex. : "ClientSecret": "tok_dev_abc123...")
+
+Laissez Environnement = "SANDBOX" pour les tests.
+
+ÉTAPE 3 — Ajouter les fichiers au projet WinDev
+-------------------------------------------------
+Dans WinDev, ajoutez au projet les fichiers sources :
+  poc\POCPennylane.wl         → groupe de procédures de test
+  src\CPennylaneTypes.wl      → déjà dans le projet normalement
+
+Vérifiez que la constante POC_CHEMIN_CONFIG dans POCPennylane.wl
+pointe bien vers votre config_poc.json :
+  CONSTANTE
+      POC_CHEMIN_CONFIG = "C:\Mes Projets\pennylane\poc\config_poc.json"
+  FIN
+
+ÉTAPE 4 — Lancer le POC
+-------------------------
+Depuis une fenêtre de test WinDev, appelez :
+  POC_LancerTous()
+
+Exemple dans le code d'un bouton :
+  POC_LancerTous()
+
+Consultez ensuite la fenêtre de trace (Ctrl+F8 dans l'IDE WinDev)
+pour voir tous les résultats.
+
+TESTS DISPONIBLES
+-----------------
+  Test 1 — GET /me                   → ObtenirProfil()
+  Test 2 — GET /customers            → ListerClients()
+  Test 3 — GET /customer_invoices    → ListerFacturesClient() (paginé)
+  Test 4 — GET /suppliers            → ListerFournisseurs()
+  Test 5 — GET /supplier_invoices    → ListerFacturesFournisseur() (paginé)
+  Test 6 — POST /company_customers   → CreerClientEntreprise()  [DÉSACTIVÉ]
+  Test 7 — POST /suppliers           → CreerFournisseur()        [DÉSACTIVÉ]
+
+Les tests 6 et 7 créent réellement des enregistrements sur le sandbox.
+Décommentez le bloc /* ... */ dans POCPennylane.wl pour les activer.
+
+RÉSULTAT ATTENDU (trace)
+-------------------------
+  === POC Pennylane — démarrage ===
+  OK : Initialisation réussie
+  --- Test 1 : ObtenirProfil ---
+  OK : company_name = Ma Société
+  OK : email        = contact@masociete.fr
+  --- Test 2 : ListerClients ---
+  OK : premier appel reçu
+  --- Test 3 : ListerFacturesClient ---
+  OK : 12 facture(s) client récupérée(s)
+       Première facture : id=42, statut=finalized
+  ...
+  === POC terminé — voir fenêtre de trace ===
+
+=====================================================================

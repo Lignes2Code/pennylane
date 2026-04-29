@@ -1,0 +1,231 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : CPennylaneOAuth2Auth
+ major_version : 30
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x19ea5f7b000d0abe
+ internal_properties : HgAAAB4AAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      CONSTANTE
+      	cTokenURL = "https://app.pennylane.com/oauth/token"
+      FIN
+      
+      CPennylaneOAuth2Auth est une Classe
+      	implémente IAuthStrategy
+      
+      
+      	oConfig			est un CPennylaneConfig dynamique
+      	oTokenStore		est un CPennylaneTokenStore dynamique
+      	oEventBus		est un CPennylaneEventBus dynamique
+      	StateOAuth		est une Chaîne
+      	PortLocal		est un Entier	= 9753
+      fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     procedure_id : 1867409977385028286
+     type_code : 27
+     code : |1+
+      procédure Constructeur(
+      	config		est un CPennylaneConfig ,
+      	tokenStore	est un CPennylaneTokenStore,
+      	eventBus	est un CPennylaneEventBus
+      )
+      oConfig		<- config
+      oTokenStore	<- tokenStore
+      oEventBus	<-  eventBus
+      
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1867409977385093822
+     type_code : 28
+     code : |1+
+      procédure Destructeur()
+      
+     type : 655360
+   -
+     name : Rafraichir
+     procedure_id : 1867412081926767290
+     type_code : 12
+     code : |1-
+      procédure Rafraichir() : booléen
+      req est un httpRequête
+      
+      req.URL			= cTokenURL
+      req.Méthode		= httpPost
+      req.ContentType	= "application/x-www-form-urlencoded"
+      req.Contenu		= ChaîneConstruit(
+      	"grant_type=refresh_token" +
+      	"&refresh_token=%1"        +
+      	"&client_id=%2"            +
+      	"&client_secret=%3",
+      	URLEncode(oTokenStore.TokenRafraichissement.Valeur),
+      	URLEncode(oConfig.ClientID),
+      	URLEncode(oConfig.ClientSecret)
+      )
+      	rep est un httpRéponse = HTTPEnvoie(req)
+      SELON rep.CodeEtat
+      	CAS 200 : // OK — on continue
+      	CAS 400 :
+      		oEventBus.PublierErreur("OAuth2", "Requête invalide (400) — vérifier les paramètres")
+      		RETOUR Faux
+      	CAS 401 :
+      		oEventBus.PublierErreur("OAuth2", "Token refusé (401) — réauthentification requise")
+      		RETOUR Faux
+      	CAS 403 :
+      		oEventBus.PublierErreur("OAuth2", "Accès interdit (403) — client_id ou secret invalide")
+      		RETOUR Faux
+      	AUTRE CAS :
+      		oEventBus.PublierErreur("OAuth2", ChaîneConstruit(
+      		"Échec HTTP %1 : %2", rep.CodeEtat, rep.Contenu
+      		))
+      		RETOUR Faux
+      FIN
+      // Parser la réponse JSON
+      jReponse est un Variant
+      Désérialise(rep.Contenu, jReponse, psdJSON)
+      oTokenStore.Stocker(
+      	jReponse.access_token,
+      	jReponse.refresh_token,
+      	jReponse.expires_in
+      )
+      oEventBus.PublierTokenRefraichi(oTokenStore.TokenAcces)
+      RETOUR Vrai
+     type : 458752
+   -
+     name : ObtenirHeader
+     procedure_id : 1867412081926833326
+     type_code : 12
+     code : |1-
+      procédure ObtenirHeader() : chaîne
+      SI PAS oTokenStore.TokenAccesValide() ALORS
+      	SI PAS Rafraichir() ALORS
+      		oEventBus.PublierErreur("OAuth2", "Échec du rafraîchissement du token : header non disponible")
+      		RETOUR ""
+      	FIN
+      FIN
+      RETOUR oTokenStore.TokenAcces.Header()
+     type : 458752
+   -
+     name : EstValide
+     procedure_id : 1867412086221866533
+     type_code : 12
+     code : |1-
+      procédure EstValide() : booléen
+      RETOUR oTokenStore.TokenAccesValide()
+     type : 458752
+   -
+     name : Authentifier
+     procedure_id : 1867412086221932476
+     type_code : 12
+     code : |1-
+      procédure Authentifier() : booléen
+      RETOUR LancerFlow()
+     type : 458752
+   -
+     name : LancerFlow
+     procedure_id : 1868024454065804616
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //! @return (booléen)  <indiquez ici les valeurs possibles ainsi que leur interprétation>
+      //!
+      //!
+      
+      procédure LancerFlow()
+      
+      // Générer un state aléatoire anti-CSRF
+      StateOAuth = ChaîneConstruit("%1%2", DateHeureSys(), Hasard(100000, 999999))
+      sURL est une Chaîne = ConstruireURLAuth()
+      
+      
+      RETOUR Vrai
+      
+     type : 458752
+   -
+     name : ConstruireURLAuth
+     procedure_id : 1868036630299809539
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //! @return (chaîne ANSI)  <indiquez ici les valeurs possibles ainsi que leur interprétation>
+      //!
+      //!
+      
+      procédure ConstruireURLAuth():Chaîne
+      RETOUR ChaîneConstruit(
+      	"https://app.pennylane.com/oauth/authorize?response_type=code&client_id=%1&redirect_uri=%2&scope=%3&state=%4",
+      	oConfig.ClientID,
+      	oConfig.RedirectURI,
+      	"customer_invoices:all supplier_invoices:all",
+      	StateOAuth
+      )
+     type : 458752
+   -
+     name : EchangerCode
+     procedure_id : 1868709711802900866
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure EchangerCode(sCode est une Chaîne, sState est une Chaîne) : Booléen
+      // Vérification anti-CSRF : le state reçu doit correspondre au state émis
+      SI sState <> StateOAuth ALORS
+      	oEventBus.PublierErreur("OAuth2", "Vérification anti-CSRF échouée : state invalide")
+      	RETOUR Faux
+      FIN
+      req est un httpRequête
+      req.URL			= cTokenURL
+      req.Méthode		= httpPost
+      req.ContentType	= "application/x-www-form-urlencoded"
+      req.Contenu		= ChaîneConstruit(
+      "grant_type=authorization_code&code=%1&redirect_uri=%2&client_id=%3&client_secret=%4",
+      	URLEncode(sCode),
+      	URLEncode(oConfig.RedirectURI),
+      	URLEncode(oConfig.ClientID),
+      	URLEncode(oConfig.ClientSecret)
+      )
+      rep est un httpRéponse = HTTPEnvoie(req)
+      SI rep.CodeEtat <> 200 ALORS
+      	oEventBus.PublierErreur("OAuth2", ChaîneConstruit("Échec de l'échange de code HTTP %1", rep.CodeEtat))
+      	RETOUR Faux
+      FIN
+      jReponse est un Variant
+      Désérialise(rep.Contenu, jReponse, psdJSON)
+      oTokenStore.Stocker(
+      jReponse.access_token,
+      jReponse.refresh_token,
+      jReponse.expires_in
+      )
+      oEventBus.PublierTokenRefraichi(oTokenStore.TokenAcces)
+      RETOUR Vrai
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HgAAAB4AAADXPUOq6bQdTI/fs1mC0I6nimWl2G84EsAbne5i32IM05uoRA==
+  original_name : Classe1
+resources :
+ string_res :
+  identifier : 0x19ea5f79000a02ee
+  internal_properties : HgAAAB4AAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : HgAAAB4AAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

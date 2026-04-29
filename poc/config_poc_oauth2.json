@@ -1,0 +1,11 @@
+{
+  "CheminFichier": "",
+  "Environnement": "PRODUCTION",
+  "BaseURL": "https://app.pennylane.com",
+  "BaseURLProvisioning": "https://app.pennylane.com/api/partner/v2",
+  "ClientID": "VOTRE_CLIENT_ID_OAUTH",
+  "ClientSecret": "VOTRE_CLIENT_SECRET_OAUTH",
+  "RedirectURI": "http://localhost:9753/callback",
+  "CompanyID": "",
+  "UserID": ""
+}

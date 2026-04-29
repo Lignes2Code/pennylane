@@ -1,0 +1,121 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : CPennylaneTokenStore
+ major_version : 30
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x19eb50e40033b78b
+ internal_properties : HgAAAB4AAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      CPennylaneTokenStore est une Classe
+      
+      	TokenAcces				est un CPennylaneToken
+      	TokenRafraichissement	est un CPennylaneToken
+      
+      	PRIVE
+      	oConfig					est un CPennylaneConfig dynamique
+      fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     procedure_id : 1867675410661422987
+     type_code : 27
+     code : |1+
+      procédure Constructeur(config est un CPennylaneConfig dynamique)
+      oConfig <- config
+      
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1867675410661488523
+     type_code : 28
+     code : |1+
+      procédure Destructeur()
+      
+     type : 655360
+   -
+     name : Stocker
+     procedure_id : 1867675595345387130
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure Stocker(sAcces est une Chaîne, sRefresh est une Chaîne, nExpiresIn est un Entier)
+      TokenAcces.Valeur						= sAcces
+      TokenAcces.Type							= "Bearer"
+      TokenAcces.DateExpiration				= DateHeureSys() + (nExpiresIn / 100)
+      // nExpiresIn fourni par l'API en secondes → conversion en DateHeure
+      
+      TokenRafraichissement.Valeur			= sRefresh
+      TokenRafraichissement.Type				= "Bearer"
+      TokenRafraichissement.DateExpiration	= DateHeureSys() + (90 * 24 * 3600 / 100)
+      // Refresh token valide 90 jours
+      
+      // Persister dans la config (sérialisé/chiffré)
+      oConfig.Sauvegarder()
+      
+     type : 458752
+   -
+     name : Charger
+     procedure_id : 1867675732784438419
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure Charger(): Booléen
+      RETOUR oConfig.Charger(oConfig.CheminFichier)
+      
+     type : 458752
+   -
+     name : TokenAccesValide
+     procedure_id : 1867675822978771947
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure TokenAccesValide(): Booléen
+      RETOUR TokenAcces.EstValide()
+      
+     type : 458752
+   -
+     name : Effacer
+     procedure_id : 1867675878813425425
+     type_code : 12
+     code : |1+
+      //!
+      //! @brief <indiquez ici ce que fait la procédure>
+      //!
+      //!
+      procédure Effacer()
+      TokenAcces.Valeur						= ""
+      TokenAcces.DateExpiration				= "00000000000000"
+      TokenRafraichissement.Valeur			= ""
+      TokenRafraichissement.DateExpiration	= "00000000000000"
+      oConfig.Sauvegarder()
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HgAAAB4AAADXPUOq6bQdTI/fs1mC0I6nimWl2G84EsAbne5i32IM05uoRA==
+  original_name : Classe1
+resources :
+ string_res :
+  identifier : 0x19eb50e10030ab85
+  internal_properties : HgAAAB4AAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : HgAAAB4AAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

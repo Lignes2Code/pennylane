@@ -69,7 +69,7 @@ PROCÉDURE PRIVÉE DéchiffrerValeur(données est un Buffer, cle est une Chaîne
 FIN
 ```
 
-- Clé `cle` dérivée de : `NomOrdinateur() + SIDUtilisateurCourant()` — jamais stockée dans le fichier.
+- Clé `cle` dérivée de : `NomMachine() + NomUtilisateur()` — jamais stockée dans le fichier.
 - `SHA2()` retourne un `Buffer` de 32 octets = clé AES-256 valide.
 
 ---

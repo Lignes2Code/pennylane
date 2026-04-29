@@ -1,0 +1,11 @@
+{
+  "CheminFichier": "",
+  "Environnement": "PRODUCTION",
+  "BaseURL": "https://app.pennylane.com",
+  "BaseURLProvisioning": "https://app.pennylane.com/api/partner/v2",
+  "ClientID": "contact@lignes2code.fr",
+  "ClientSecret": "rlpKhlzABjxWCvODqeQ23d6kb1QPCymccZP9L2VpRhM",
+  "RedirectURI": "",
+  "CompanyID": "227617",
+  "UserID": "1147926"
+}

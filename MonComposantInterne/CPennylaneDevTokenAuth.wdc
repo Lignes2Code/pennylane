@@ -1,0 +1,85 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : CPennylaneDevTokenAuth
+ major_version : 30
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x19eb51690042bffe
+ internal_properties : HgAAAB4AAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      CPennylaneDevTokenAuth est une Classe
+      implémente  IAuthStrategy
+      	oConfig		est un CPennylaneConfig
+      	TokenDev	est une Chaîne
+      fin
+     type : 131072
+  procedures :
+   -
+     name : Constructeur
+     procedure_id : 1867675981893058558
+     type_code : 27
+     code : |1+
+      procédure Constructeur(config est un CPennylaneConfig)
+      oConfig = config
+      
+     type : 589824
+   -
+     name : Destructeur
+     procedure_id : 1867675981893124094
+     type_code : 28
+     code : |1+
+      procédure Destructeur()
+      
+     type : 655360
+   -
+     name : Rafraichir
+     procedure_id : 1867676514472010424
+     type_code : 12
+     code : |1-
+      procédure Rafraichir() : booléen
+      RETOUR Faux
+     type : 458752
+   -
+     name : ObtenirHeader
+     procedure_id : 1867676514472076303
+     type_code : 12
+     code : |1-
+      procédure ObtenirHeader() : chaîne
+      RETOUR "Bearer " + TokenDev
+     type : 458752
+   -
+     name : EstValide
+     procedure_id : 1867676518767109479
+     type_code : 12
+     code : |1-
+      procédure EstValide() : booléen
+      RETOUR TokenDev <> ""
+     type : 458752
+   -
+     name : Authentifier
+     procedure_id : 1867676518767175359
+     type_code : 12
+     code : |1-
+      procédure Authentifier() : booléen
+      TokenDev = oConfig.ClientSecret   // Convention : stocker le dev token dans ClientSecret
+      RETOUR TokenDev <> ""
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : HgAAAB4AAADXPUOq6bQdTI/fs1mC0I6nimWl2G84EsAbne5i32IM05uoRA==
+  original_name : Classe1
+resources :
+ string_res :
+  identifier : 0x19eb5168003fbabe
+  internal_properties : HgAAAB4AAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : HgAAAB4AAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

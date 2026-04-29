@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #222;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+    }
+    h1 { font-size: 20px; color: #1a1a2e; border-bottom: 2px solid #4a90d9; padding-bottom: 8px; }
+    h2 { font-size: 16px; color: #1a1a2e; margin-top: 30px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+    h3 { font-size: 14px; color: #333; margin-top: 20px; }
+    table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13px; }
+    th { background-color: #4a90d9; color: white; padding: 8px 10px; text-align: left; }
+    td { padding: 7px 10px; border-bottom: 1px solid #e0e0e0; }
+    tr:nth-child(even) td { background-color: #f7f9fc; }
+    .total-row td { font-weight: bold; background-color: #eaf2ff; border-top: 2px solid #4a90d9; }
+    .info-box { background-color: #f0f6ff; border-left: 4px solid #4a90d9; padding: 10px 14px; margin: 14px 0; font-size: 13px; }
+    .warning-box { background-color: #fff8e1; border-left: 4px solid #f5a623; padding: 10px 14px; margin: 14px 0; font-size: 13px; }
+    .entete { background-color: #f7f9fc; border: 1px solid #ddd; padding: 14px 18px; margin-bottom: 24px; font-size: 13px; }
+    .entete td { border: none; padding: 3px 8px; background: none; }
+    .charge { font-weight: bold; color: #4a90d9; }
+    ul { margin: 6px 0; padding-left: 20px; }
+    li { margin-bottom: 4px; }
+    .footer { margin-top: 40px; border-top: 1px solid #ddd; padding-top: 14px; font-size: 12px; color: #666; }
+    .section-num { color: #4a90d9; }
+  </style>
+</head>
+<body>
+
+
+
+<div class="warning-box">
+  <strong>Pr&eacute;ambule &mdash; Contrainte de compatibilit&eacute; WinDev</strong><br><br>
+  Le d&eacute;veloppement est recommand&eacute; en <strong>WinDev version 24</strong> afin d'assurer la compatibilit&eacute; directe avec l'application ma&icirc;tre existante. Toute autre version (<strong>WinDev 25 &agrave; 28</strong>) n'est pas compatible sans r&eacute;&eacute;criture compl&egrave;te des structures de donn&eacute;es et des endpoints API.<br><br>
+  Si la version ma&icirc;tre est migr&eacute;e en <strong>WinDev 28 ou sup&eacute;rieure</strong>, le d&eacute;veloppement pourra &ecirc;tre r&eacute;alis&eacute; directement dans cette version, &agrave; condition que la migration soit effective avant le d&eacute;but du projet.<br><br>
+  En cas de non migration, il sera n&eacute;cessaire de :
+  <ul style="margin-top:6px;">
+    <li>Recr&eacute;er toutes les structures de donn&eacute;es m&eacute;tier</li>
+    <li>Adapter l'ensemble des endpoints et appels API</li>
+  </ul>
+</div>
+
+<h2><span class="section-num">1.</span> P&eacute;rim&egrave;tre de la mission</h2>
+
+<h3>Phase 1 &mdash; Infrastructure et authentification</h3>
+
+<table>
+  <tr><th>#</th><th>Livrable</th><th>Description</th><th>Charge</th></tr>
+  <tr><td>1.1</td><td><strong>Architecture logicielle</strong></td><td>Conception compl&egrave;te &mdash; design patterns SOLID adapt&eacute;s &agrave; WinDev/WLangage</td><td>1 j</td></tr>
+  <tr><td>1.2</td><td><strong>Authentification OAuth 2.0</strong></td><td>Flow Authorization Code, &eacute;change de code, refresh automatique</td><td>1 j</td></tr>
+  <tr><td>1.3</td><td><strong>Gestion de configuration</strong></td><td>Param&eacute;trage JSON, bascule sandbox/production sans recompilation</td><td>0,5 j</td></tr>
+  <tr><td>1.4</td><td><strong>Gestion des tokens</strong></td><td>Persistance s&eacute;curis&eacute;e, v&eacute;rification d&rsquo;expiration automatique</td><td>0,5 j</td></tr>
+  <tr><td>1.5</td><td><strong>Fa&ccedil;ade unifi&eacute;e + bus d&rsquo;&eacute;v&eacute;nements</strong></td><td>Point d&rsquo;entr&eacute;e unique, notifications vers l&rsquo;application ma&icirc;tre</td><td>0,5 j</td></tr>
+  <tr><td>1.6</td><td><strong>Composant OpenAPI + structures m&eacute;tier</strong></td><td>Typage fort de tous les objets Pennylane (factures, clients, fournisseurs)</td><td>1 j</td></tr>
+  <tr class="total-row"><td colspan="3">Charge Phase 1</td><td>4 jours</td></tr>
+</table>
+
+<h3>Phase 2 &mdash; Couche m&eacute;tier RFE</h3>
+
+<div class="info-box">P&eacute;rim&egrave;tre centr&eacute; sur les obligations l&eacute;gales de la RFE : &eacute;mission et r&eacute;ception de factures &eacute;lectroniques.</div>
+
+<table>
+  <tr><th>#</th><th>Livrable</th><th>Description</th><th>Charge</th></tr>
+  <tr><td>2.1</td><td><strong>Factures clients</strong></td><td>Cr&eacute;ation, r&eacute;cup&eacute;ration, pagination, Factur-X (obligation sept. 2026)</td><td>2 j</td></tr>
+  <tr><td>2.2</td><td><strong>Factures fournisseurs</strong></td><td>R&eacute;cup&eacute;ration, statuts, pagination (obligation sept. 2026)</td><td>0,5 j</td></tr>
+  <tr><td>2.3</td><td><strong>Client HTTP centralis&eacute;</strong></td><td>Gestion des headers, erreurs, sandbox/production</td><td>0,5 j</td></tr>
+  <tr class="total-row"><td colspan="3">Charge Phase 2</td><td>3 jours</td></tr>
+</table>
+
+<h3>Phase 3 &mdash; Int&eacute;gration et recette</h3>
+
+<div class="info-box">
+  <strong>Note sur le flow OAuth 2.0 :</strong> lors de la premi&egrave;re connexion, l&rsquo;utilisateur est redirig&eacute; vers Pennylane dans le navigateur pour autoriser l&rsquo;application. Une fen&ecirc;tre WinDev d&eacute;di&eacute;e permettra &agrave; l&rsquo;utilisateur de coller ce code pour finaliser la connexion.<br><br>
+  <strong>Remarque :</strong> une fen&ecirc;tre de provisioning et de cr&eacute;ation d&rsquo;utilisateur sera n&eacute;cessaire pour permettre l&rsquo;initialisation du compte Pennylane lors de la premi&egrave;re utilisation.
+</div>
+
+<table>
+  <tr><th>#</th><th>Livrable</th><th>Description</th><th>Charge</th></tr>
+  <tr><td>3.1</td><td><strong>Fen&ecirc;tre de login</strong></td><td>Interface WinDev de connexion utilisateur (identifiants, m&eacute;morisation de session, gestion des erreurs d&rsquo;authentification)</td><td>0,75 j</td></tr>
+  <tr><td>3.2</td><td><strong>Fen&ecirc;tre de connexion OAuth</strong></td><td>Interface WinDev pour lancer l&rsquo;autorisation Pennylane, coller le code re&ccedil;u et valider la connexion</td><td>0,75 j</td></tr>
+  <tr><td>3.3</td><td><strong>Fen&ecirc;tre de provisioning / cr&eacute;ation utilisateur</strong></td><td>Provisioning et cr&eacute;ation d&rsquo;utilisateur Pennylane lors de la premi&egrave;re utilisation</td><td>1 j</td></tr>
+  <tr><td>3.4</td><td><strong>Int&eacute;gration dans WinDev</strong></td><td>Connexion du composant &agrave; votre application ma&icirc;tre</td><td>0,5 j</td></tr>
+  <tr><td>3.5</td><td><strong>Tests et recette</strong></td><td>Validation sandbox + donn&eacute;es r&eacute;elles, correction des anomalies</td><td>0,5 j</td></tr>
+  <tr class="total-row"><td colspan="3">Charge Phase 3</td><td>3,5 jours</td></tr>
+</table>
+
+<h2><span class="section-num">3.</span> R&eacute;capitulatif financier</h2>
+
+<table>
+  <tr><th>Phase</th><th>Description</th><th>Charge</th><th>TJM (€ HT)</th><th>Montant HT</th></tr>
+  <tr><td>Phase 1</td><td>Infrastructure, auth OAuth2, composants WinDev</td><td>4 j</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr><td>Phase 2</td><td>Factures clients + fournisseurs (RFE)</td><td>3 j</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr><td>Phase 3</td><td>Fen&ecirc;tres login, OAuth, provisioning, int&eacute;gration, tests, recette</td><td>3,5 j</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  <tr class="total-row"><td colspan="2"><strong>TOTAL</strong></td><td><strong>10 jours</strong></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+
+
+</body>
+</html>

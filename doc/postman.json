@@ -1,0 +1,721 @@
+{
+	"info": {
+		"_postman_id": "2c540448-860e-4653-a022-0a833b4a5479",
+		"name": "Pennylane - RFE endpoints examples",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32449353"
+	},
+	"item": [
+		{
+			"name": "Sandbox - Provisioning API - Token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "client_id",
+							"value": "{{client_id_Test}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret_Test}}"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials"
+						},
+						{
+							"key": "scope",
+							"value": "companies:all users",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL_Test}}/oauth/token",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Provisioning  API - Create a user",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{provisioningAPIToken_Test}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user\": {\n    \"email\": \"jean.paul@outlook.com\",\n    \"first_name\": \"Jean\",\n    \"last_name\": \"Paul\",\n    \"phone_number\": \"+33606060606\"\n  }\n}"
+				},
+				"url": {
+					"raw": "{{baseURL_Test}}/api/external/provisioning/v1/users",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"api",
+						"external",
+						"provisioning",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Provisioning API - Create a company",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{provisioningAPIToken_Test}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_ids\": [\n    123\n  ],\n  \"company\": {\n    \"country_alpha2\": \"FR\",\n    \"number_of_employees\": \"6_15\",\n    \"number_of_users\":\"1\",\n    \"saas_plan\": \"v1_essential\",\n    \"name\": \"test\",\n    \"reg_no\": \"123456789\",\n    \"activity_code\": \"46.90Z\",\n    \"address\": \"1, rue de la Paix\",\n    \"city\": \"Paris\",\n    \"postal_code\": \"75002\"\n  },\n  \"force_pro_account_creation\": false\n}"
+				},
+				"url": {
+					"raw": "{{baseURL_Test}}/api/external/provisioning/v1/companies",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"api",
+						"external",
+						"provisioning",
+						"v1",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Provisioning API - List my users",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{provisioningAPIToken_Test}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL_Test}}/api/external/provisioning/v1/users",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"api",
+						"external",
+						"provisioning",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Provisioning API - List my companies",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{provisioningAPIToken_Test}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL_Test}}/api/external/provisioning/v1/companies",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"api",
+						"external",
+						"provisioning",
+						"v1",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Company API - URL Authorization Oauth",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL_Test}}/oauth/authorize?client_id={{client_id}}&redirect_uri=https://www.example.com/testing&response_type=code&scope=customer_invoices:all customers:all suppliers:all pa_registrations:readonly",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"oauth",
+						"authorize"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "{{client_id}}"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://www.example.com/testing"
+						},
+						{
+							"key": "response_type",
+							"value": "code"
+						},
+						{
+							"key": "scope",
+							"value": "customer_invoices:all customers:all suppliers:all pa_registrations:readonly"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Company API - Token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "client_id",
+							"value": "{{client_id_Test}}"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret_Test}}"
+						},
+						{
+							"key": "code",
+							"value": "<code>"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://www.example.com/testing"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL_Test}}/oauth/token",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Company API - Token Refresh",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "client_id",
+							"value": "{{client_id_Test}}"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret_Test}}"
+						},
+						{
+							"key": "refresh_token",
+							"value": "<refresh_token>"
+						},
+						{
+							"key": "grant_type",
+							"value": "refresh_token"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL_Test}}/oauth/token",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Company API - List customers (company and individual)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{companyAPIToken_Test}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL_Test}}/api/external/v2/customers",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"api",
+						"external",
+						"v2",
+						"customers"
+					]
+				},
+				"description": "This endpoint allows you to import an e-invoice.\n\n> ℹ️\n> This endpoint requires one of the following scopes: `e_invoices:all`"
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Company API - Create a company customer",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{companyAPIToken_Test}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ledger_account\": {\n    \"number\": \"411100344\"\n  },\n  \"billing_address\": {\n    \"address\": \"8 rue de la paix\",\n    \"postal_code\": \"75002\",\n    \"city\": \"Paris\",\n    \"country_alpha2\": \"FR\"\n  },\n  \"delivery_address\": {\n    \"address\": \"8 rue de la paix\",\n    \"postal_code\": \"75002\",\n    \"city\": \"Paris\",\n    \"country_alpha2\": \"FR\"\n  },\n  \"payment_conditions\": \"30_days\",\n  \"name\": \"My company\",\n  \"vat_number\": \"FR12345678901\",\n  \"reg_no\": \"123456789\",\n  \"phone\": \"+33612345678\",\n  \"billing_iban\": \"FR1420041010050500013M02606\",\n  \"recipient\": \"John Doe\",\n  \"reference\": \"REF-1234\",\n  \"notes\": \"Some notes\",\n  \"emails\": [\n    \"hello@example.org\"\n  ],\n  \"external_reference\": \"0e67fc3c-c632-4feb-ad34-e18ed5fbf66a\",\n  \"billing_language\": \"fr_FR\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL_Test}}/api/external/v2/company_customers",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"api",
+						"external",
+						"v2",
+						"company_customers"
+					]
+				},
+				"description": "This endpoint allows you to import an e-invoice.\n\n> ℹ️\n> This endpoint requires one of the following scopes: `e_invoices:all`"
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Company API - Create an individual customer",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{companyAPIToken_Test}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"billing_address\": {\n    \"address\": \"8 rue de la paix\",\n    \"postal_code\": \"75002\",\n    \"city\": \"Paris\",\n    \"country_alpha2\": \"FR\"\n  },\n  \"delivery_address\": {\n    \"address\": \"8 rue de la paix\",\n    \"postal_code\": \"75002\",\n    \"city\": \"Paris\",\n    \"country_alpha2\": \"FR\"\n  },\n  \"payment_conditions\": \"30_days\",\n  \"ledger_account\": {\n    \"number\": \"411100344\"\n  },\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"phone\": \"+33612345678\",\n  \"billing_iban\": \"FR1420041010050500013M02606\",\n  \"recipient\": \"John Doe\",\n  \"reference\": \"REF-1234\",\n  \"notes\": \"Some notes\",\n  \"emails\": [\n    \"hello@example.org\"\n  ],\n  \"external_reference\": \"0e67fc3c-c632-4feb-ad34-e18ed5fbf66a\",\n  \"billing_language\": \"fr_FR\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL_Test}}/api/external/v2/individual_customers",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"api",
+						"external",
+						"v2",
+						"individual_customers"
+					]
+				},
+				"description": "This endpoint allows you to import an e-invoice.\n\n> ℹ️\n> This endpoint requires one of the following scopes: `e_invoices:all`"
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Company API - Import a customer e-invoice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{companyAPIToken_Test}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"description": "(Required) The invoice file to be imported.\nMust be an e-invoice format.\n",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "invoice_options",
+							"value": "{\"customer_id\":1234567,\"invoice_lines\":[{\"e_invoice_line_id\":\"1\",\"ledger_account_id\":1234567},{\"e_invoice_line_id\":\"2\",\"ledger_account_id\":1234567}]}",
+							"description": "(Optional) Optional JSON payload to enrich the imported customer invoice. Invoice line e_invoice_line_id must match Factur-X BT-126 (LineID).",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseURL_Test}}/api/external/v2/customer_invoices/e_invoices/imports",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"api",
+						"external",
+						"v2",
+						"customer_invoices",
+						"e_invoices",
+						"imports"
+					]
+				},
+				"description": "This endpoint allows you to import an e-invoice.\n\n> ℹ️\n> This endpoint requires one of the following scopes: `e_invoices:all`"
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Company API - List customer invoices",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{companyAPIToken_Test}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL_Test}}/api/external/v2/customer_invoices",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"api",
+						"external",
+						"v2",
+						"customer_invoices"
+					]
+				},
+				"description": "This endpoint allows you to import an e-invoice.\n\n> ℹ️\n> This endpoint requires one of the following scopes: `e_invoices:all`"
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Company API - List supplier invoices",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{companyAPIToken_Test}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL_Test}}/api/external/v2/supplier_invoices",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"api",
+						"external",
+						"v2",
+						"supplier_invoices"
+					]
+				},
+				"description": "This endpoint allows you to import an e-invoice.\n\n> ℹ️\n> This endpoint requires one of the following scopes: `e_invoices:all`"
+			},
+			"response": []
+		},
+		{
+			"name": "Sandbox - Company API - List PA Registrations",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{companyAPIToken_Test}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL_Test}}/api/external/v2/pa_registrations",
+					"host": [
+						"{{baseURL_Test}}"
+					],
+					"path": [
+						"api",
+						"external",
+						"v2",
+						"pa_registrations"
+					]
+				},
+				"description": "This endpoint allows you to import an e-invoice.\n\n> ℹ️\n> This endpoint requires one of the following scopes: `e_invoices:all`"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "client_id_Test",
+			"value": "<client_id_Test>",
+			"type": "string"
+		},
+		{
+			"key": "client_secret_Test",
+			"value": "<client_secret_Test>",
+			"type": "string"
+		},
+		{
+			"key": "baseURL_Test",
+			"value": "https://sandbox.pennylane.com",
+			"type": "string"
+		},
+		{
+			"key": "provisioningAPIToken_Test",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "companyAPIToken_Test",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
