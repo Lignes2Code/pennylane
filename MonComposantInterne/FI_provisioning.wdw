@@ -44,7 +44,7 @@ window :
         type_code : 2
         p_codes : []
      -
-       name : IMG_etat
+       name : IMG_etat_animation
        identifier : 0x29f23aad0f243d93
        internal_properties : HgAAAB4AAAC1RkX8jQRVzj6+sX7ErmxuRVKNgWud9vIPIy4MQfxSjC7iioEfk3ivhFi48l4K5YvsHz5czkqgGnmDYHFN859CtI/ZTXQAj3jrrL1C+pCT3/Jc6MyXIDLCtOo6ayidijFrBtMi+SdqjNDWIthD8+7ym1G5ZNnm1CwpG8IaI0I0bbvRIuItJtAtanyMb9edWk40lRHzJtO1aJLRQ9zi56KasiY/qejTNoGaSU/a/dTr5kK9N1Ekd//FlL8Q/vsrvTFfYWMjv0YZc3bPFcmZmuYEHNiKyGzHCYMo3Yz8ZjMG/S1ZqMQB4OuwwJryJt2n7Sv+f/ukckFadMzyBZiwX/De7aesy94vxSb9LgEPwa5B3+zzRQ30RorSkRuefey5XoRV5z2V595YuLCQYLW7rDeUvzh8jKBoSU2EFO6pr44ddTyg+COm6/7UmD0fi7w6B+VdmSgEjG8Huutv00m+cqCKh2UWayb3JoD76BFq3Jrz0TGl1XS6EfONEvBJ8mKICP8KCVCN8ZNoQI2T/rR4DI+Dd2X+OvF5a/1lAaDnaBM5Mn+6Od+eueC7pZPYXTVaF46QaOUgBr/eD4qABef9FNwVz3Efp6HrGNco0qVcm+olIFl9AI1/+qBxVg9Go3swOSJ79XAbb5Ng22Dx6fRYvKMEfG43DMKpdUY7vy6aywTXM4aQJm7zQCmcuTLrqouER6KJHW1vsm2Nhk07mnOd4EZg/ECvBjBfAm+DgYcZ70cgKBgGJ9etNotTA9+v47kcbSeM6GtYZ0E8C3Ln0qugMmMQ1SPikWtOBADKSQy3NhM8umMyFMbfgZUWpNuj/OIglTL+M0cXRJp4KAq1U+/vceU9cVa6RoxGrk/d+UEO1VS3igb0pqTZV5m/Ujzhq1YMLa+pPu+3zocefNOV83C2RwzA07QYpupjPEXiXswQGNjtJDGhslHfpan337EG9uDRFzgeXK5nMcK3xn1VQc3sAaQxHEDBt9xEJgatqpShY47ju5pgOBFe8sADLIk5PcYWv0alx5nq9SRG61Cscz5GJS836YSzAIz9hw4HyvatsK0kD3fiEwR0cdpnXcIFh3vJyamiwiIomWjSCx8QcGx6uEdEqs4oyYDjyukPXJQ=
        properties :
@@ -60,36 +60,30 @@ window :
        code_elements :
         type_code : 8
         p_codes : []
+     -
+       name : IMG_etat
+       identifier : 0x29f2482013f1c9e8
+       internal_properties : HgAAAB4AAAAUsHu2ZyEoJALX7Qw2e0z90PZOsXktTzxlGtDQ56FLVHIeUHkED1EJ8VP/3xgaSss4x6gIvK4too7lMoK+iQuB01PHBUdCPlgH1IuxomIYAwHHLIi2EJjAYjjpxlsGCkTa5FRuahNBKC/MaDBgQSLSWqQDgNQV1lCgqljwVOj3s75jxzkn2TyCfBLDgvOm9u0aGEvcc48dezO784oq3bGMVmxueKPZDjrYZFrpDEGL0IOjeycjMQe9KFf59cD6ecMWpinyssgz7L4QKkzFjvMLJZkaVHFWey12H3yDfUW0Iehobl5YJm1bD3WCJww5m4o1LvgR3nfU1BJCKfzjC3Uhi1RQaHksArJ94IG4EFeiKSVBlmdeJroaeTSaU6mtOwtrfMaXi3udmSAIFq/AD3YRQIVSpH/YHBq23WKSRtlkUn+WJgNNvRedK/4jriXdLQJNmRhOtmldEd+jPTRyAlyO0OEDTVzjGFZJAFVHfdcS3TIRO3/AhnU2xKAUzzXQgMjdbNFbwol/VuDoRFAUgw/EnRQuG+P39VNsvqpF34tbQN3jgIoFDIytvEtDAAOj52mXUlQkU3fdK6UecadXEejt77N3fz/EckghGyZTv26girv+swsr2sN1IeNXbEqdW4vl+DLQHDxnMnhqcEtD7lY6DS7qjOQnVz0ekB81lGp2FJxSv4vV1mSlI8qSt25OaoKuRlEy3lxuhvcaLgGqws78A7bX56XPscvUwXf7mem+OUsrXhsas+ZyuMKQpRxnDbBLPWVp4oOyUC1Sn7Hc3cb+FrH9MASVfj4REKCZwPVj11v0xRJPHbRNHT7sz9Q5gtVUhfDXdQLr87jDNnekNa71+C8NWq8euGbefExsZiVaYQK88TEzr2GVERkvk23nq18t/Lru5lmVA631VmeVRWZyExfG9oRATOgSVkOFjm5FYIThYPRLdvIYbfUzZcVuhbF1JYOQt696byhbA/5Ei32WjDsJ5BJgd8K5lzlRoDEXc+re/YnbQEhMgks96O7IiDsBBQ==
+       properties :
+        x : 9
+        y : 12
+        width : 48
+        height : 48
+        tab_stop : 0
+        take_focus : 0
+       style : {}
+       type : 8
+       code_elements :
+        type_code : 8
+        p_codes : []
     type : 32
     code_elements :
      type_code : 70
      p_codes :
       -
-        code : |1-
+        code : |1+
          PROCEDURE MaFenêtre(etatDetailProvisionning est un etatDetailProvisionning)
-         CheminImageEtat est une chaine
-         SELON etatDetailProvisionning.etat
-         	CAS en_cours
-         		CheminImageEtat = fRepDonnées()+ fSep() + CHEMIN_IMAGE_EN_COURS
-         		IMG_etat.Animation = vrai
-         
-         
-         	CAS en_attente
-         		CheminImageEtat = fRepDonnées()+ fSep() + CHEMIN_IMAGE_EN_ATTENTE
-         		IMG_etat.Animation = faux
-         
-         	CAS est_refuse
-         		CheminImageEtat = fRepDonnées()+ fSep() + CHEMIN_IMAGE_EST_REFUSE
-         		IMG_etat.Animation = Faux
-         
-         	CAS est_valide
-         		CheminImageEtat = fRepDonnées()+ fSep() + CHEMIN_IMAGE_EST_VALIDE
-         		IMG_etat.Animation = Faux
-         
-         FIN
-         
-         LIB_Libellé = etatDetailProvisionning.detail
-         IMG_etat = CheminImageEtat
+         Maj()
       -
         code : |1+
          
@@ -135,6 +129,50 @@ window :
  code_elements :
   type_code : 71
   p_codes : []
+  procedures :
+   -
+     name : Maj
+     procedure_id : 1869638949482982140
+     type_code : 14
+     code : |1-
+      // Résumé : <indiquez ici ce que fait la procédure>
+      // Syntaxe :
+      // Maj ()
+      //
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	Aucune
+      //
+      // Exemple :
+      // <Indiquez ici un exemple d'utilisation>
+      //
+      procédure Maj()
+      
+      CheminImageEtat est une chaîne
+      SELON etatDetailProvisionning.etat
+      	CAS en_cours
+      		CheminImageEtat				= fRepDonnées()+ fSep() + CHEMIN_IMAGE_EN_COURS
+      		IMG_etat_animation..Visible	= Vrai
+      	CAS en_attente
+      		CheminImageEtat				= fRepDonnées()+ fSep() + CHEMIN_IMAGE_EN_ATTENTE
+      		IMG_etat_animation..Visible	= Faux
+      	CAS est_refuse
+      		CheminImageEtat				= fRepDonnées()+ fSep() + CHEMIN_IMAGE_EST_REFUSE
+      		IMG_etat_animation..Visible	= Faux
+      	CAS est_valide
+      		CheminImageEtat				= fRepDonnées()+ fSep() + CHEMIN_IMAGE_EST_VALIDE
+      		IMG_etat_animation..Visible	= Faux
+      FIN
+      
+      
+      
+      LIB_Libellé			= etatDetailProvisionning.detail
+      IMG_etat			= CheminImageEtat
+      IMG_etat..Visible	= PAS IMG_etat_animation..Visible
+     type : 458752
+  procedure_templates : []
+  property_templates : []
  code_parameters :
   internal_properties : HgAAAB4AAADXPUOq6bQdTI/fs1mC0I6nimWl2G84EsAbne5i32IM05uoRA==
   original_name : FI_SansNom1

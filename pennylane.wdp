@@ -32,24 +32,6 @@ project :
      internal_properties : HgAAAB4AAACfFCNddRqEapD6xGR0X7oxY+GCfI8rOcp3fMdP2KJgNIPZKTBYURl+SY6W
      physical_name : .\Accounting.wdopapi
      type : 29
-   -
-     name : FI_UnCommentaire
-     identifier : 0x49f2178a019970d6
-     internal_properties : HgAAAB4AAAD3U9/D4F3V1uYdHpHhNB7Cne7YyASmS/yihsZ5QuurRbMZo11J8Fq1x3hiXibaphriYg==
-     physical_name : .\FI_UnCommentaire.wdw
-     type : 8
-   -
-     name : FI_provisioning
-     identifier : 0x49f21f9201c8ce61
-     internal_properties : HgAAAB4AAACV8f0hnvuz7PgTIPe/US5XWTasjDBNxyZW7Z16iGG9K4VfIL4b5pyvzX54QMAwyDiAgA==
-     physical_name : .\FI_provisioning.wdw
-     type : 8
-   -
-     name : FI_Provisionings
-     identifier : 0x49f1db9600d6fe4c
-     internal_properties : HgAAAB4AAABn409TUA0lxpYMaOd0DQCY9ZA8vJqGWcOOe9PIOeCqrlLeSLYty5s8t2hSrnZqFopy8g==
-     physical_name : .\FI_Provisionings.wdw
-     type : 8
   other_elements : []
   array_of_analysis : []
   net_assemblies : []

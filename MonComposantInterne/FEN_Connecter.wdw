@@ -358,7 +358,7 @@ window :
      type_code : 4
      p_codes :
       -
-        code : |1-
+        code : |1+
          
          valeurActuel est un entier  = SC_Timeline.Valeur
          
@@ -366,7 +366,13 @@ window :
          	SC_Timeline= SC_Timeline + 1
          SINON
          	SC_Timeline = 1
+         	CFI_SansNom1.ChangeFenêtreSource(FI_contact)
          FIN
+         
+         si SC_Timeline=2 alors
+         	CFI_SansNom1.ChangeFenêtreSource(FI_Provisionings)
+         FIN
+         
         type : 18
       -
         type : 161
