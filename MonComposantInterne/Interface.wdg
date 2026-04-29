@@ -124,6 +124,18 @@ procedure_set :
       	status	est une Chaîne		// "disputed" | "refused" | "approved"
       	reason	est une Chaîne		// Requis si disputed ou refused
       FIN
+      
+      etatProvisionning est une Enumération
+      	en_cours
+      	en_attente
+      	est_refuse
+      	est_valide
+      FIN
+      
+      etatDetailProvisionning est une Structure
+      	detail	est une chaîne
+      	etat	est un etatProvisionning
+      FIN
      type : 720896
   procedures :
    -
